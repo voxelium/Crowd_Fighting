@@ -1360,19 +1360,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!65 &1639035912
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149106568606}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.36622396, y: 1.4429954, z: 0.3564739}
-  m_Center: {x: 0, y: 0.71941596, z: -0.000000014901161}
 --- !u!1 &1748323837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,11 +1888,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653646862116}
+  - component: {fileID: 919132149106568609}
   - component: {fileID: 1639035911}
-  - component: {fileID: 1639035912}
   - component: {fileID: 1639035910}
-  - component: {fileID: 919132149106568608}
-  - component: {fileID: 919132149106568607}
+  - component: {fileID: 919132149106568610}
   m_Layer: 0
   m_Name: Player_Man
   m_TagString: Untagged
@@ -1913,7 +1899,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &919132149106568607
+--- !u!136 &919132149106568609
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149106568606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.17
+  m_Height: 1.43
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.71851635, z: 0}
+--- !u!114 &919132149106568610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1922,27 +1922,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 919132149106568606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Script: {fileID: 11500000, guid: 13e46c51fd44346f9ae834f2a2dc6ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Embed","macro":null,"embed":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":102.0,"y":147.0},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-204.0,"y":-144.0},"guid":"d0637458-5486-4d67-a515-d941648360d5","$version":"A","$type":"Unity.VisualScripting.Start"},{"coroutine":false,"defaultValues":{},"position":{"x":-216.0,"y":3.0},"guid":"fa5cd7f9-f40c-467a-a5e0-963b74c7d522","$version":"A","$type":"Unity.VisualScripting.Update","$id":"12"},{"member":{"name":"velocity","parameterTypes":null,"targetType":"UnityEngine.Rigidbody","targetTypeName":"UnityEngine.Rigidbody","$version":"A"},"defaultValues":{"target":null},"position":{"x":-216.0,"y":122.0},"guid":"169d9098-bcdf-4d0c-a770-470215d53aaf","$version":"A","$type":"Unity.VisualScripting.GetMember","$id":"14"},{"chainable":false,"parameterNames":["vector"],"member":{"name":"InverseTransformVector","parameterTypes":["UnityEngine.Vector3"],"targetType":"UnityEngine.Transform","targetTypeName":"UnityEngine.Transform","$version":"A"},"defaultValues":{"target":null,"%vector":{"x":0.0,"y":0.0,"z":0.0,"$type":"UnityEngine.Vector3"}},"position":{"x":12.0,"y":3.0},"guid":"76eaad46-ffc5-4999-91f3-9908ee1a31b0","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"17"},{"sourceUnit":{"$ref":"12"},"sourceKey":"trigger","destinationUnit":{"$ref":"17"},"destinationKey":"enter","guid":"c8b3a2be-67bf-4d49-89f0-c92b76a68821","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"14"},"sourceKey":"value","destinationUnit":{"$ref":"17"},"destinationKey":"%vector","guid":"85df9516-b521-4466-8a66-fb5a5254ef91","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}}'
-    _objectReferences: []
---- !u!114 &919132149106568608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149106568606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
+  speed: 5
+  animator: {fileID: 1639035910}
 --- !u!4 &919764916777471650
 Transform:
   m_ObjectHideFlags: 0
