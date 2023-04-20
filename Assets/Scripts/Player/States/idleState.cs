@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class idleState : PlayerState
 {
-
+    private void Update()
+    {
+        
+    }
 
 }

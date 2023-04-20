@@ -28,9 +28,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Update()
     {
-        if (_currentState != null)
-            return;
-
+        if (_currentState == null)
+        {
+          return;
+        }
+           
         PlayerState nextState = _currentState.GetNextState();
 
         if (nextState != null)
@@ -41,11 +43,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Transit(PlayerState nextState)
     {
-        if (_currentState !=null)
+        if (_currentState != null)
             _currentState.Exit();
 
         _currentState = nextState;
-
         if (_currentState != null)
             _currentState.Enter(_rigidbody, _animator);
         
