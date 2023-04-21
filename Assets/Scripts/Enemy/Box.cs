@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box : MonoBehaviour, iDamageable
+public class Box : MonoBehaviour
 {
-    public bool ApplyDamage(Rigidbody rigidbody, float force)
-    {
-        Debug.Log("я коробка");
-        return true;
-    }
+
 }
