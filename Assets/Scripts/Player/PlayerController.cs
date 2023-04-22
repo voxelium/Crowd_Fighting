@@ -12,12 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 JoystickSize = new Vector2(300, 300);
     [SerializeField] private FloatingJoystick Joystick;
     [SerializeField] private NavMeshAgent playerNavMeshAgent;
+    [SerializeField] private Animator playerAnimator;
 
     private Finger MovementFinger;
     private Vector2 MovementAmount;
-
-    public Animator playerAnimator;
-
+    
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();

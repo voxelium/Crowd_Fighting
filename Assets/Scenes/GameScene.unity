@@ -1204,7 +1204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 757671937}
   - component: {fileID: 757671939}
-  - component: {fileID: 757671940}
+  - component: {fileID: 757671942}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &757671940
+--- !u!114 &757671942
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 3.16, z: -3.67}
+  m_FollowOffset: {x: 0, y: 4.2, z: -3.57}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1440,8 +1440,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.27311984, y: 0, z: 0, w: 0.96198004}
-  m_LocalPosition: {x: 0, y: 3.74, z: -3.67}
+  m_LocalRotation: {x: 0.31068832, y: 0, z: 0, w: 0.9505119}
+  m_LocalPosition: {x: 0, y: 4.7799997, z: -3.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2546,8 +2546,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128005126}
-  m_LocalRotation: {x: 0.27311984, y: 0, z: 0, w: 0.96198004}
-  m_LocalPosition: {x: 0, y: 3.74, z: -3.67}
+  m_LocalRotation: {x: 0.31068832, y: 0, z: 0, w: 0.9505119}
+  m_LocalPosition: {x: 0, y: 4.7799997, z: -3.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2926,7 +2926,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 0.1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3573,7 +3573,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3610,7 +3610,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2586475681530783579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59658acb4d8274960bcc57c5657ccf8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e112e17602174fed8647fb2f2bde77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPoints:
@@ -3619,7 +3619,9 @@ MonoBehaviour:
   - {fileID: 77810239}
   - {fileID: 676774999}
   - {fileID: 189747993}
-  speed: 2
+  enemyNavMeshAgent: {fileID: 3396954626812477135}
+  enemyAnimator: {fileID: 3396954626812477123}
+  targetPoint: 0
 --- !u!1 &3410877980975560565
 GameObject:
   m_ObjectHideFlags: 0

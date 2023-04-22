@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : MonoBehaviour
+public class test_EnemyPatrol : MonoBehaviour
 {
-    [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] public Transform[] patrolPoints;
     [SerializeField] private float speed;
     
-    private int targetPoint = 0;
+    private int targetPoint;
     private bool definitionMethod = true;
 
     private void Start()
