@@ -6,12 +6,12 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
-public class PlayerTouchMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private Vector2 JoystickSize = new Vector2(300, 300);
     [SerializeField] private FloatingJoystick Joystick;
-    [SerializeField] private NavMeshAgent Player;
+    [SerializeField] private NavMeshAgent playerNavMeshAgent;
 
     private Finger MovementFinger;
     private Vector2 MovementAmount;
@@ -21,6 +21,7 @@ public class PlayerTouchMovement : MonoBehaviour
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        playerNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
 
@@ -105,7 +106,7 @@ public class PlayerTouchMovement : MonoBehaviour
                     Joystick.RectTransform.anchoredPosition;
             }
 
-            Joystick.Knob.anchoredPosition = knobPosition;
+            Joystick.joystickKnob.anchoredPosition = knobPosition;
             MovementAmount = knobPosition / maxMovement;
         }
     }
@@ -117,7 +118,7 @@ public class PlayerTouchMovement : MonoBehaviour
         if (LostFinger == MovementFinger)
         {
             MovementFinger = null;
-            Joystick.Knob.anchoredPosition = Vector2.zero;
+            Joystick.joystickKnob.anchoredPosition = Vector2.zero;
             Joystick.gameObject.SetActive(false);
             MovementAmount = Vector2.zero;
         }
@@ -127,13 +128,15 @@ public class PlayerTouchMovement : MonoBehaviour
     private void Update()
     {
         Vector3 scaledMovement =
-            Player.speed * Time.deltaTime * new Vector3(MovementAmount.x, 0, MovementAmount.y);
+            playerNavMeshAgent.speed * Time.deltaTime * new Vector3(MovementAmount.x, 0, MovementAmount.y);
 
-        Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
-        Player.Move(scaledMovement );
+        playerNavMeshAgent.Move(scaledMovement);
 
-        print("MovementAmount.x: " + MovementAmount.x);
-        print("MovementAmount.y: " + MovementAmount.y);
+        playerNavMeshAgent.transform.LookAt(playerNavMeshAgent.transform.position + scaledMovement, Vector3.up);
+
+
+        //print("MovementAmount.x: " + MovementAmount.x);
+        //print("MovementAmount.y: " + MovementAmount.y);
 
         playerAnimator.SetFloat("MoveX", MovementAmount.x);
         playerAnimator.SetFloat("MoveZ", MovementAmount.y);
