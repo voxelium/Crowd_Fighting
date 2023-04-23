@@ -7,15 +7,13 @@ public class EnemyWalkState : StateMachineBehaviour
 {
     float timer;
     NavMeshAgent enemyNavMeshAgent;
-    private Transform targetPoint;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = 0;
         enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
-
-        targetPoint = animator.GetComponent<EnemyPatrolPoints>().targetPoint;
+        enemyNavMeshAgent.isStopped = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,31 +21,23 @@ public class EnemyWalkState : StateMachineBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer > 10)
+        if (timer > 15)
         {
             animator.SetBool("isPatrolling", false);
-            
+            enemyNavMeshAgent.isStopped = true;
         }
-
-        if (enemyNavMeshAgent.remainingDistance <= 0.1)
-
-        {
-            enemyNavMeshAgent.SetDestination(targetPoint.position);
-        }
-
-        //Debug.Log("Target Point: " + targetPoint);
 
     }
 
    
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
 
-        enemyNavMeshAgent.SetDestination(enemyNavMeshAgent.transform.position);
+        //enemyNavMeshAgent.SetDestination(enemyNavMeshAgent.transform.position);
         
-    }
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

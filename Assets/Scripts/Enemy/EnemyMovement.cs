@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private Transform[] patrolPoints;
-    [SerializeField] private NavMeshAgent enemyNavMeshAgent;
     [SerializeField] private Animator enemyAnimator;
+    private NavMeshAgent enemyNavMeshAgent;
 
     public int targetPoint = 0;
     private bool definitionMethod = true;
@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
         targetPoint = 0;
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
         enemyNavMeshAgent.SetDestination(patrolPoints[targetPoint].position);
+        enemyNavMeshAgent.isStopped = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,8 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        enemyAnimator.SetFloat("EnemyAnimBlend", enemyNavMeshAgent.speed);
-
+        //enemyAnimator.SetFloat("EnemyAnimBlend", enemyNavMeshAgent.speed);
 
         //Вариант смены точки патрулирования без использования Триггеров пересечения
         //но использование update лучше все-таки избегать. Вариант с Триггером менее затратный
