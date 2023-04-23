@@ -32,6 +32,14 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         enemyAnimator.SetFloat("EnemyAnimBlend", enemyNavMeshAgent.speed);
+
+
+        //Вариант смены точки патрулирования без использования Триггеров пересечения
+        //но использование update лучше все-таки избегать. Вариант с Триггером менее затратный
+        //if (enemyNavMeshAgent.remainingDistance <= 0.2f)
+        //{
+        //    DefinitionTargets();
+        //}
     }
 
 
