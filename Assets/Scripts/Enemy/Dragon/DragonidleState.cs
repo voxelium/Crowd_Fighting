@@ -3,34 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterIdleState : StateMachineBehaviour
+public class DragonidleState : StateMachineBehaviour
 {
     float timer;
-    NavMeshAgent enemyNavMeshAgent;
+    Transform player;
+    float chaseRange = 5;
 
-    private void Start()
-    {
-        enemyNavMeshAgent.isStopped = true;
-    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = 0;
-
-        enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
-        enemyNavMeshAgent.isStopped = true;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         timer += Time.deltaTime;
+
+        //start patroling
         if (timer > 5)
         {
             animator.SetBool("isPatroling", true);
-            enemyNavMeshAgent.isStopped = false;
         }
+
+        // start chasing the player
+        if (player)
+        {
+            float chaseDistance = Vector3.Distance(player.position, animator.transform.position);
+
+            if (chaseDistance < chaseRange)
+            {
+                animator.SetBool("isChasing", true);
+            }
+
+        }
+
+        
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
