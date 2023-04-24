@@ -7,6 +7,7 @@ public class DragonChaseState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     Transform player;
+    float stopChaseRange = 6;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,7 +25,7 @@ public class DragonChaseState : StateMachineBehaviour
         float chaseDistance = Vector3.Distance(player.position, animator.transform.position);
 
         //Stop chasing condition
-        if (chaseDistance > 10)
+        if (chaseDistance > stopChaseRange)
         {
             animator.SetBool("isChasing", false);
         }

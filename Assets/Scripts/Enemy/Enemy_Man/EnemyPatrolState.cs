@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyWalkState : StateMachineBehaviour
+public class EnemyPatrolState : StateMachineBehaviour
 {
     Transform player;
     float timer;

@@ -9,6 +9,7 @@ public class EnemyChaseState : StateMachineBehaviour
     Transform targetPatrolPoint;
     NavMeshAgent agent;
     float chaseRange = 5;
+    Vector3 currentPatrolPoint;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,19 +17,13 @@ public class EnemyChaseState : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        targetPatrolPoint = player.GetComponent<EnemyPatrolPoints>().targetPoint;
-
-        if (targetPatrolPoint)
-        {
-            Debug.Log("Тарег Поинт получен");
-        }
+        currentPatrolPoint = agent.destination;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //agent.SetDestination(player.position);
-
+        agent.SetDestination(player.position);
         float chaseDistance = Vector3.Distance(player.position, animator.transform.position);
 
         //Stop chasing condition
@@ -42,7 +37,7 @@ public class EnemyChaseState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(targetPatrolPoint.position);
+        agent.SetDestination(currentPatrolPoint);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

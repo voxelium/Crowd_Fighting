@@ -11,12 +11,14 @@ public class EnemyMovement : MonoBehaviour
 
     public int targetPoint = 0;
     private bool definitionMethod = true;
+    public Vector3 targetPointPosition;
 
     private void Start()
     {
         targetPoint = 0;
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        enemyNavMeshAgent.SetDestination(patrolPoints[targetPoint].position);
+        SetTargetPointPosition();
+
         enemyNavMeshAgent.isStopped = true;
     }
 
@@ -67,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
             DefinitionTargets();
         }
 
-        enemyNavMeshAgent.SetDestination(patrolPoints[targetPoint].position);
+        SetTargetPointPosition();
     }
 
 
@@ -82,8 +84,14 @@ public class EnemyMovement : MonoBehaviour
             DefinitionTargets();
         }
 
-        enemyNavMeshAgent.SetDestination(patrolPoints[targetPoint].position);
+        SetTargetPointPosition();
 
+    }
+
+    public void SetTargetPointPosition()
+    {
+        targetPointPosition = patrolPoints[targetPoint].position;
+        enemyNavMeshAgent.SetDestination(targetPointPosition);
     }
 
 }
