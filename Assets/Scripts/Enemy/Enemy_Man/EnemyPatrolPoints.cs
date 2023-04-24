@@ -10,11 +10,17 @@ public class EnemyPatrolPoints : MonoBehaviour
     private bool definitionMethod = true;
     private int PointCount;
 
+    float timer;
+
+    private void Awake()
+    {
+        PointCount = 0;
+        targetPoint = patrolPoints[PointCount];
+    }
+
     private void Start()
     {
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        PointCount = 0;
-        targetPoint = patrolPoints[PointCount];
         enemyNavMeshAgent.SetDestination(patrolPoints[PointCount].position);
     }
 
@@ -25,6 +31,7 @@ public class EnemyPatrolPoints : MonoBehaviour
         {
             DefinitionTargets();
         }
+
     }
 
 

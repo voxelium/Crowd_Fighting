@@ -3,41 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyWalkState : StateMachineBehaviour
+public class EnemyChaseState : StateMachineBehaviour
 {
-    float timer;
-    NavMeshAgent enemyNavMeshAgent;
+    Transform player;
+    Transform targetPatrolPoint;
+    NavMeshAgent agent;
+    float chaseRange = 5;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer = 0;
-        enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
-        enemyNavMeshAgent.isStopped = false;
+        agent = animator.GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        targetPatrolPoint = player.GetComponent<EnemyPatrolPoints>().targetPoint;
+
+        if (targetPatrolPoint)
+        {
+            Debug.Log("Тарег Поинт получен");
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer += Time.deltaTime;
+        //agent.SetDestination(player.position);
 
-        if (timer > 15)
+        float chaseDistance = Vector3.Distance(player.position, animator.transform.position);
+
+        //Stop chasing condition
+        if (chaseDistance > chaseRange)
         {
-            animator.SetBool("isPatrolling", false);
-            enemyNavMeshAgent.isStopped = true;
+            animator.SetBool("isChasing", false);
         }
 
     }
 
-   
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-
-        //enemyNavMeshAgent.SetDestination(enemyNavMeshAgent.transform.position);
-        
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        agent.SetDestination(targetPatrolPoint.position);
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

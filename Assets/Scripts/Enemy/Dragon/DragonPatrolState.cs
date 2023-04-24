@@ -14,10 +14,10 @@ public class DragonPatrolState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 0.5f;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         timer = 0;
         GameObject patrolPointsGroup = GameObject.FindGameObjectWithTag("DragonPatrolPoints");
@@ -60,8 +60,6 @@ public class DragonPatrolState : StateMachineBehaviour
             {
                 animator.SetBool("isChasing", true);
             }
-
-            Debug.Log(chaseDistance);
         }
     }
 
