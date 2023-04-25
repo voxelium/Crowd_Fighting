@@ -3870,6 +3870,7 @@ MonoBehaviour:
   - {fileID: 189747993}
   enemyAnimator: {fileID: 3396954626812477123}
   targetPoint: 0
+  targetPointPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &3396954626812477139
 Rigidbody:
   m_ObjectHideFlags: 0

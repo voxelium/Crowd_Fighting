@@ -6,17 +6,22 @@ using UnityEngine.AI;
 public class EnemyPatrolState : StateMachineBehaviour
 {
     Transform player;
-    float timer;
     NavMeshAgent enemyNavMeshAgent;
+    private Vector3 currentPatrolPoint;
+    float timer;
     float chaseRange = 5;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = 0;
-        enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
-        enemyNavMeshAgent.isStopped = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
+        currentPatrolPoint = animator.GetComponent<EnemyMovement>().targetPointPosition;
+        enemyNavMeshAgent.SetDestination(currentPatrolPoint);
+
+        enemyNavMeshAgent.isStopped = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,14 +32,15 @@ public class EnemyPatrolState : StateMachineBehaviour
         if (timer > 15)
         {
             animator.SetBool("isPatrolling", false);
-            enemyNavMeshAgent.isStopped = true;
+            enemyNavMeshAgent.SetDestination(currentPatrolPoint);
+            //enemyNavMeshAgent.isStopped = true;
         }
 
 
-        float chaseDistance = Vector3.Distance(player.position, animator.transform.position);
+        float distanceToPlayer = Vector3.Distance(player.position, animator.transform.position);
 
         //Start Chasing
-        if (chaseDistance < chaseRange)
+        if (distanceToPlayer < chaseRange)
         {
             animator.SetBool("isChasing", true);
         }
