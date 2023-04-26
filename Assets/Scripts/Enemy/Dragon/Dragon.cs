@@ -11,6 +11,9 @@ public class Dragon : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         HP -= damageAmount;
+
+        Debug.Log("Dragon HP: " + HP);
+
         if (HP <= 0)
         {
             //Play animation Death

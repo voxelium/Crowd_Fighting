@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         if (MovedFinger == MovementFinger)
         {
             Vector2 knobPosition;
-            float maxMovement = JoystickSize.x / 2f;
+            float maxMovement = JoystickSize.x / 2.2f;
             ETouch.Touch currentTouch = MovedFinger.currentTouch;
 
             if (Vector2.Distance(currentTouch.screenPosition,
@@ -140,13 +140,9 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("MoveX", MovementAmount.x);
         playerAnimator.SetFloat("MoveZ", MovementAmount.y);
 
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    playerAnimator.SetBool("Kick", true);
-        //}
 
-       
 
+      //временно удар на кнопке пробел
         if (Input.GetButtonDown("Jump"))
         {
             playerAnimator.SetBool("Kick", true);

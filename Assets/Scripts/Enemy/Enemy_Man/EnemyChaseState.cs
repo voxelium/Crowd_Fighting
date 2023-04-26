@@ -10,7 +10,7 @@ public class EnemyChaseState : StateMachineBehaviour
     Transform targetPatrolPoint;
     NavMeshAgent agent;
     float stopChaseRange = 4;
-    float startAttackRange = 1;
+    float startAttackRange = 2;
     Vector3 currentPatrolPoint;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
