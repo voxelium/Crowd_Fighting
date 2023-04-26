@@ -140,6 +140,18 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("MoveX", MovementAmount.x);
         playerAnimator.SetFloat("MoveZ", MovementAmount.y);
 
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    playerAnimator.SetBool("Kick", true);
+        //}
+
+       
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            playerAnimator.SetBool("Kick", true);
+        }
+
     }
 
 
