@@ -142,11 +142,11 @@ public class PlayerController : MonoBehaviour
 
 
 
-      //временно удар на кнопке пробел
-        if (Input.GetButtonDown("Jump"))
-        {
-            playerAnimator.SetBool("Kick", true);
-        }
+      //временно Удар нажатие на кнопку пробел
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    playerAnimator.SetBool("Kick", true);
+        //}
 
     }
 
