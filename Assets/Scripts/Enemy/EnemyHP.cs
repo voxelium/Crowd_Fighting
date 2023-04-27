@@ -7,7 +7,14 @@ public class EnemyHP : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] private float HP = 100;
+    [SerializeField] public float HP = 100;
+
+    private new Collider collider;
+
+    private void Start()
+    {
+        collider = GetComponent<Collider>();
+    }
 
 
     public void TakeDamage(int damageAmount)
@@ -20,15 +27,22 @@ public class EnemyHP : MonoBehaviour
         {
             //Play animation Death
             animator.SetTrigger("Death");
-            GetComponent<Collider>().enabled = false;
-            agent.enabled = false;
+
+            StartCoroutine(SetCollisionFalse());
+            agent.isStopped = true;
         }
         else
         {
             //Play get hit animation
             animator.SetTrigger("Damage");
-
-            //Debug.Log("damage" + damageAmount);
         }
     }
+
+
+    IEnumerator SetCollisionFalse()
+    {
+        yield return new WaitForSeconds(2f);
+        collider.enabled = false;
+    }
+
 }
