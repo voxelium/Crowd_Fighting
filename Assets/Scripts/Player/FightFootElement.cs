@@ -14,17 +14,8 @@ public class FightFootElement : MonoBehaviour
         if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyHP>().TakeDamage(damageAmount);
-            Debug.Log("Удар по врагу");
+            //Debug.Log("Удар по врагу");
         }
     }
 
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag == "Enemy")
-    //    {
-    //        other.GetComponent<EnemyHP>().TakeDamage(damageAmount);
-    //        Debug.Log("Удар по врагу");
-    //    }
-    //}
 }

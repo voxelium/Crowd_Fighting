@@ -41,13 +41,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
-        {
-            enemyHP = other.GetComponent<EnemyHP>().HP;
-        }
-        
 
-        if (other.tag == "Enemy" && enemyHP > 0)
+        if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
         {
             animator.SetBool("Kick", true);
         }
@@ -56,12 +51,17 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Enemy" && enemyHP > 0)
+        if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
         {
             animator.SetBool("Kick", true);
+            Debug.Log("Enemy Health: " + enemyHP);
         }
-        //else
-        //    animator.SetBool("Kick", false);
+        else if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP <= 0)
+        {
+            animator.SetBool("Kick", false);
+            Debug.Log("Enemy Health: " + enemyHP);
+        }
+
         
     }
 

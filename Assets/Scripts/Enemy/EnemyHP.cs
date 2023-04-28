@@ -2,34 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyHP : MonoBehaviour
 {
-    [SerializeField] Animator animator;
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] public float HP = 100;
+    [SerializeField] private Animator animator;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private float maxHP = 100;
+    public float currentHP;
 
     private new Collider collider;
 
     private void Start()
     {
         collider = GetComponent<Collider>();
+        currentHP = maxHP;
+    }
+
+    private void Update()
+    {
+        healthBar.value = currentHP / maxHP;
     }
 
 
     public void TakeDamage(int damageAmount)
     {
-        HP -= damageAmount;
+        currentHP -= damageAmount;
 
-        Debug.Log("Enemy HP: " + HP);
-
-        if (HP <= 0)
+        if (currentHP <= 0)
         {
             //Play animation Death
             animator.SetTrigger("Death");
-
-            StartCoroutine(SetCollisionFalse());
             agent.isStopped = true;
+            collider.enabled = false;
+            StartCoroutine(DestroyEnemy());
+         
         }
         else
         {
@@ -39,10 +47,11 @@ public class EnemyHP : MonoBehaviour
     }
 
 
-    IEnumerator SetCollisionFalse()
+
+    IEnumerator DestroyEnemy()
     {
-        yield return new WaitForSeconds(2f);
-        collider.enabled = false;
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
     }
 
 }
