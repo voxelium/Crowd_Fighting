@@ -42,7 +42,23 @@ public class EnemyMovement : MonoBehaviour
         //{
         //    DefinitionTargets();
         //}
+
+        if (enemyNavMeshAgent.isOnOffMeshLink)
+        {
+            var meshLink = enemyNavMeshAgent.currentOffMeshLinkData;
+
+            if (meshLink.offMeshLink.area == NavMesh.GetAreaFromName("Jump"))
+            {
+                enemyNavMeshAgent.speed = 0;
+                enemyAnimator.Play("Jump");
+            }
+
+        }
     }
+
+
+
+
 
 
     private void DefinitionTargets()

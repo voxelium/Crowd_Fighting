@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-     private float enemyHP;
+
 
 
     //private void OnCollisionEnter(Collision collision)
@@ -41,10 +41,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
         {
             animator.SetBool("Kick", true);
+        }
+        else if (other.tag != "Enemy")
+        {
+            animator.SetBool("Kick", false);
         }
 
     }
@@ -54,12 +57,12 @@ public class PlayerAttack : MonoBehaviour
         if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
         {
             animator.SetBool("Kick", true);
-            Debug.Log("Enemy Health: " + enemyHP);
+            Debug.Log("Enemy tag: " + other.tag + " Health: " + other.GetComponent<EnemyHP>().currentHP);
         }
         else if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP <= 0)
         {
             animator.SetBool("Kick", false);
-            Debug.Log("Enemy Health: " + enemyHP);
+            Debug.Log("Enemy tag: " + other.tag + " Health: " + other.GetComponent<EnemyHP>().currentHP);
         }
 
         
@@ -74,4 +77,6 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+
+ 
 }
