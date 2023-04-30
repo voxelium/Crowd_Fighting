@@ -18,7 +18,7 @@ public class EnemyPatrolState : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
-        currentPatrolPoint = animator.GetComponent<EnemyMovement>().targetPointPosition;
+        currentPatrolPoint = animator.GetComponent<EnemyPatrolMovement>().targetPointPosition;
         enemyNavMeshAgent.SetDestination(currentPatrolPoint);
 
         enemyNavMeshAgent.isStopped = false;

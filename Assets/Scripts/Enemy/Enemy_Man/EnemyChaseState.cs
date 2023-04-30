@@ -19,7 +19,7 @@ public class EnemyChaseState : StateMachineBehaviour
        agent = animator.GetComponent<NavMeshAgent>();
        player = GameObject.FindGameObjectWithTag("Player").transform;
 
-       currentPatrolPoint = animator.GetComponent<EnemyMovement>().targetPointPosition;
+       currentPatrolPoint = animator.GetComponent<EnemyPatrolMovement>().targetPointPosition;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

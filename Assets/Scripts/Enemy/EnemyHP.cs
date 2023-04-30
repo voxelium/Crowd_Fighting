@@ -37,7 +37,6 @@ public class EnemyHP : MonoBehaviour
             agent.isStopped = true;
             collider.enabled = false;
             StartCoroutine(DestroyEnemy());
-         
         }
         else
         {

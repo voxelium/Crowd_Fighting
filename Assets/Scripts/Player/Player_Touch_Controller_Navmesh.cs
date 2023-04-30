@@ -6,16 +6,16 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
-public class PlayerController : MonoBehaviour
+public class bcp_Player_Touch_Controller1 : MonoBehaviour
 {
 
     [SerializeField] private Vector2 JoystickSize = new Vector2(300, 300);
-    [SerializeField] private FloatingJoystick Joystick;
+    [SerializeField] private Float_Joystick Joystick;
     [SerializeField] private NavMeshAgent playerNavMeshAgent;
     [SerializeField] private Animator playerAnimator;
 
     private Finger MovementFinger;
-    private Vector2 MovementAmount;
+    private Vector2 JoystickMovementAmount;
     
     private void Start()
     {
@@ -48,13 +48,11 @@ public class PlayerController : MonoBehaviour
         if (MovementFinger == null && TouchedFinger.screenPosition.y <= Screen.height /2f)
         {
             MovementFinger = TouchedFinger;
-            MovementAmount = Vector2.zero;
+            JoystickMovementAmount = Vector2.zero;
             Joystick.gameObject.SetActive(true);
 
             Joystick.RectTransform.sizeDelta = JoystickSize;
             Joystick.RectTransform.anchoredPosition = ClampStartPosition(TouchedFinger.screenPosition);
-
-
         }
     }
 
@@ -106,7 +104,7 @@ public class PlayerController : MonoBehaviour
             }
 
             Joystick.joystickKnob.anchoredPosition = knobPosition;
-            MovementAmount = knobPosition / maxMovement;
+            JoystickMovementAmount = knobPosition / maxMovement;
         }
     }
 
@@ -119,26 +117,26 @@ public class PlayerController : MonoBehaviour
             MovementFinger = null;
             Joystick.joystickKnob.anchoredPosition = Vector2.zero;
             Joystick.gameObject.SetActive(false);
-            MovementAmount = Vector2.zero;
+            JoystickMovementAmount = Vector2.zero;
         }
     }
 
 
     private void Update()
     {
-        Vector3 scaledMovement =
-            playerNavMeshAgent.speed * Time.deltaTime * new Vector3(MovementAmount.x, 0, MovementAmount.y);
+        Vector3 direction =
+            playerNavMeshAgent.speed * Time.deltaTime * new Vector3(JoystickMovementAmount.x, 0, JoystickMovementAmount.y);
 
-        playerNavMeshAgent.Move(scaledMovement);
+        playerNavMeshAgent.Move(direction);
 
-        playerNavMeshAgent.transform.LookAt(playerNavMeshAgent.transform.position + scaledMovement, Vector3.up);
+        playerNavMeshAgent.transform.LookAt(playerNavMeshAgent.transform.position + direction, Vector3.up);
 
 
         //print("MovementAmount.x: " + MovementAmount.x);
         //print("MovementAmount.y: " + MovementAmount.y);
 
-        playerAnimator.SetFloat("MoveX", MovementAmount.x);
-        playerAnimator.SetFloat("MoveZ", MovementAmount.y);
+        playerAnimator.SetFloat("MoveX", JoystickMovementAmount.x);
+        playerAnimator.SetFloat("MoveZ", JoystickMovementAmount.y);
 
 
 

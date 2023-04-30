@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyPatrolMovement : MonoBehaviour
 {
     [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private Animator enemyAnimator;
     private NavMeshAgent enemyNavMeshAgent;
 
-    public int targetPoint = 0;
+    private int targetPoint = 0;
     private bool definitionMethod = true;
-    public Vector3 targetPointPosition;
+    [HideInInspector] public Vector3 targetPointPosition;
 
     private void Start()
     {
@@ -49,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
 
             if (meshLink.offMeshLink.area == NavMesh.GetAreaFromName("Jump"))
             {
-                enemyNavMeshAgent.speed = 0;
+                //enemyNavMeshAgent.speed = 0;
                 enemyAnimator.Play("Jump");
             }
 
