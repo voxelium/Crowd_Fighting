@@ -6,35 +6,42 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
+
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
+        if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
+        {
+            EnemyHP battleEnemy = other.GetComponent<EnemyHP>();
+            battleEnemy.eventEnemyIsDead += StopKick;
+            animator.SetBool("Kick", true);
+        }
+
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
         {
             animator.SetBool("Kick", true);
         }
 
     }
 
-    //void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Enemy" && other.GetComponent<EnemyHP>().currentHP > 0)
-    //    {
-    //        animator.SetBool("Kick", true);
-
-    //        Debug.Log(other.name);
-    //    }
-        
-    //}
+    private void StopKick()
+    {
+        animator.SetBool("Kick", false);
+    }
 
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             animator.SetBool("Kick", false);
 
@@ -43,5 +50,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
     }
- 
+
+
+
 }

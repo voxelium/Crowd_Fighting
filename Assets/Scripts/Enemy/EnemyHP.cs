@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class EnemyHP : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemyHP : MonoBehaviour
     public float currentHP;
 
     private new Collider collider;
+    public event UnityAction eventEnemyIsDead;
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class EnemyHP : MonoBehaviour
             agent.isStopped = true;
             collider.enabled = false;
             StartCoroutine(DestroyEnemy());
+            eventEnemyIsDead?.Invoke();
         }
         else
         {

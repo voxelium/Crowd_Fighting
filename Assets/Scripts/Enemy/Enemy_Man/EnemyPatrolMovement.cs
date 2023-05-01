@@ -43,17 +43,25 @@ public class EnemyPatrolMovement : MonoBehaviour
         //    DefinitionTargets();
         //}
 
+
+        // Прыгает если обнаружена область OffMeshLink
+        //if (enemyNavMeshAgent.isOnOffMeshLink)
+        //{
+        //    var meshLink = enemyNavMeshAgent.currentOffMeshLinkData;
+
+        //    if (meshLink.offMeshLink.area == NavMesh.GetAreaFromName("Jump"))
+        //    {
+        //        enemyAnimator.Play("Jump");
+        //    }
+
+        //}
+
         if (enemyNavMeshAgent.isOnOffMeshLink)
         {
-            var meshLink = enemyNavMeshAgent.currentOffMeshLinkData;
+            enemyAnimator.Play("Jump");
+        } 
+    
 
-            if (meshLink.offMeshLink.area == NavMesh.GetAreaFromName("Jump"))
-            {
-                //enemyNavMeshAgent.speed = 0;
-                enemyAnimator.Play("Jump");
-            }
-
-        }
     }
 
 

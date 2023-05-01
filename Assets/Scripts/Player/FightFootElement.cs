@@ -4,8 +4,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
 
+
 public class FightFootElement : MonoBehaviour
+   
+
 {
+   
     [SerializeField] private int damageAmount = 10;
 
 
@@ -14,8 +18,9 @@ public class FightFootElement : MonoBehaviour
         if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyHP>().TakeDamage(damageAmount);
-            //Debug.Log("Удар по врагу");
         }
     }
+
+
 
 }
