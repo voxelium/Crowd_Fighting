@@ -18,8 +18,6 @@ public class EnemyPatrolMovement : MonoBehaviour
         targetPoint = 0;
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
         SetTargetPointPosition();
-
-        //enemyNavMeshAgent.isStopped = true;
     }
 
     private void OnTriggerEnter(Collider other)

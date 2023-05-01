@@ -34,7 +34,6 @@ public class EnemyHP : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            //Play animation Death
             animator.SetTrigger("Death");
             agent.isStopped = true;
             collider.enabled = false;
