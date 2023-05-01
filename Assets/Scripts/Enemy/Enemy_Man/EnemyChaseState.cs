@@ -16,32 +16,45 @@ public class EnemyChaseState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       agent = animator.GetComponent<NavMeshAgent>();
-       player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = animator.GetComponent<NavMeshAgent>();
+        currentPatrolPoint = animator.GetComponent<EnemyPatrolMovement>().targetPointPosition;
 
-       currentPatrolPoint = animator.GetComponent<EnemyPatrolMovement>().targetPointPosition;
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(player.position);
-        float distanceToPlayer = Vector3.Distance(player.position, animator.transform.position);
-
-        //Stop chasing condition
-        if (distanceToPlayer > stopChaseRange)
+        if (player != null)
         {
-            animator.SetBool("isChasing", false);
+            agent.SetDestination(player.position);
+            float distanceToPlayer = Vector3.Distance(player.position, animator.transform.position);
+
+            //Stop chasing condition
+            if (distanceToPlayer > stopChaseRange)
+            {
+                agent.SetDestination(currentPatrolPoint);
+                animator.SetBool("isChasing", false);
+            }
+
+            //Start attack condition
+            if (distanceToPlayer < startAttackRange)
+            {
+                animator.SetBool("isAttacking", true);
+            }
+        }
+        else if (player == null)
+        {
             agent.SetDestination(currentPatrolPoint);
+            animator.SetBool("isChasing", false);
         }
-
-        //Start attack condition
-        if (distanceToPlayer < startAttackRange)
-        {
-            animator.SetBool("isAttacking",true);
-        }
-
+            
     }
+
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -44,9 +44,6 @@ public class PlayerAttack : MonoBehaviour
         if (other.tag == "Enemy")
         {
             animator.SetBool("Kick", false);
-
-            Debug.Log("пора выключить атаку");
-
         }
 
     }

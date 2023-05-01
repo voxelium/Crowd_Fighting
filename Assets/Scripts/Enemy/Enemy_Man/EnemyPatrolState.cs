@@ -15,7 +15,12 @@ public class EnemyPatrolState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = 0;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        
 
         enemyNavMeshAgent = animator.GetComponent<NavMeshAgent>();
         currentPatrolPoint = animator.GetComponent<EnemyPatrolMovement>().targetPointPosition;
@@ -33,19 +38,26 @@ public class EnemyPatrolState : StateMachineBehaviour
         {
             animator.SetBool("isPatrolling", false);
             enemyNavMeshAgent.SetDestination(currentPatrolPoint);
-            //enemyNavMeshAgent.isStopped = true;
         }
 
-
-        float distanceToPlayer = Vector3.Distance(player.position, animator.transform.position);
-
-        //Start Chasing
-        if (distanceToPlayer < chaseRange)
+        if (player != null)
         {
-            animator.SetBool("isChasing", true);
+            float distanceToPlayer = Vector3.Distance(player.position, animator.transform.position);
+
+            //Start Chasing
+            if (distanceToPlayer < chaseRange)
+            {
+                animator.SetBool("isChasing", true);
+            }
         }
+        else if (player == null)
+        {
+            enemyNavMeshAgent.SetDestination(currentPatrolPoint);
+        }
+
 
     }
+
 
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

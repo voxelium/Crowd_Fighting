@@ -17,7 +17,11 @@ public class DragonPatrolState : StateMachineBehaviour
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 0.5f;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
 
         timer = 0;
         GameObject patrolPointsGroup = GameObject.FindGameObjectWithTag("DragonPatrolPoints");

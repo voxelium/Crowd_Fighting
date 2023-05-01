@@ -11,6 +11,7 @@ public class EnemyHP : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Slider healthBar;
     [SerializeField] private float maxHP = 100;
+    [SerializeField] private GameMode gameMode;
     public float currentHP;
 
     private new Collider collider;
@@ -53,6 +54,7 @@ public class EnemyHP : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         Destroy(gameObject);
+        gameMode.EnemyCountDecrease();
     }
 
 }
